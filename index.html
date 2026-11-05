@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111116">
+<title>آزمون جامع شناخت شخصیت</title>
+<style>
+:root{--bg:#0d0d12;--panel:#17171f;--panel2:#20202a;--text:#f3f1f7;--muted:#aaa6b5;--line:#343340;--accent:#c6a7ff;--accent2:#9d7be0;--good:#8ed6b0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 0%,#29213a 0,transparent 34%),var(--bg);color:var(--text);font-family:Tahoma,"Segoe UI",sans-serif;line-height:1.9}
+.wrap{max-width:850px;margin:auto;padding:24px 16px 70px}.hero{padding:28px 24px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#211d2b,#15151c);margin-bottom:18px}
+.eyebrow{color:var(--accent);font-size:12px;letter-spacing:1px}.hero h1{font-size:clamp(24px,5vw,36px);line-height:1.5;margin:8px 0}.hero p{color:var(--muted);margin:8px 0}
+.notice{font-size:13px;color:#d8d1e3;background:#292431;border-right:3px solid var(--accent);padding:12px 14px;border-radius:10px;margin-top:18px}
+.progressbox{position:sticky;top:0;z-index:5;background:#0d0d12ed;padding:12px 0 10px;backdrop-filter:blur(10px)}
+.progressrow{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:7px}.track{height:7px;background:#2b2933;border-radius:20px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width .2s}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;margin:16px 0}.sectionhead{display:flex;align-items:center;gap:12px;margin-bottom:14px}.num{width:34px;height:34px;border-radius:11px;background:#332944;color:var(--accent);display:grid;place-items:center;font-weight:bold}.sectionhead h2{font-size:19px;margin:0}.sectionhead p{font-size:12px;color:var(--muted);margin:0}
+.q{padding:16px 0;border-top:1px solid var(--line)}.q:first-of-type{border-top:0}.qtitle{font-weight:600;margin-bottom:10px}.q small{color:var(--muted)}
+textarea,input[type=text]{width:100%;background:var(--panel2);color:var(--text);border:1px solid #454251;border-radius:11px;padding:12px;font:inherit;outline:none}textarea:focus,input:focus{border-color:var(--accent)}textarea{min-height:82px;resize:vertical}
+.opts{display:grid;gap:8px}.opt{display:flex;align-items:flex-start;gap:9px;background:var(--panel2);border:1px solid #343340;border-radius:11px;padding:10px 12px;cursor:pointer;font-size:14px}.opt:has(input:checked){border-color:var(--accent);background:#30283d}.opt input{accent-color:var(--accent);margin-top:6px;flex:0 0 auto}
+.scale{display:flex;gap:8px;flex-wrap:wrap}.scale label{flex:1;min-width:44px;text-align:center;padding:8px 4px;border:1px solid var(--line);border-radius:9px;background:var(--panel2);cursor:pointer}.scale input{accent-color:var(--accent)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}button{border:0;border-radius:12px;padding:13px 18px;font:inherit;font-weight:bold;cursor:pointer}.primary{background:var(--accent);color:#17121f}.secondary{background:#292733;color:var(--text);border:1px solid var(--line)}button:disabled{opacity:.45;cursor:not-allowed}
+#result{display:none}.resulttext{white-space:pre-wrap;background:#111117;border:1px solid var(--line);border-radius:12px;padding:14px;font:13px/2 Tahoma;max-height:340px;overflow:auto}.success{color:var(--good);font-size:13px}.footer{color:var(--muted);font-size:12px;text-align:center;margin-top:30px}
+@media(max-width:560px){.wrap{padding:14px 11px 50px}.hero{padding:20px 17px}.card{padding:15px}.scale{gap:5px}.scale label{min-width:38px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+<div class="eyebrow">شناخت شخصیت و توانایی‌های شناختی</div>
+<h1>آزمون جامع شناخت شخصیت</h1>
+<p>این آزمون برای شناخت الگوهای شخصیتی، عادت‌ها، سبک فکر کردن، روابط، هیجان‌ها و توانایی‌های شناختی طراحی شده است.</p>
+<div class="notice">پاسخ درست یا غلطی وجود ندارد. صادقانه و بر اساس رفتار واقعی خودت جواب بده، نه تصویری که دوست داری دیگران از تو داشته باشند. پاسخ‌ها روی هیچ سروری بارگذاری نمی‌شوند و در همین مرورگر ساخته می‌شوند. در پایان می‌توانی متن پاسخ‌ها را کپی کنی یا یک لینکِ حاوی پاسخ‌ها بسازی و برای تحلیل‌گر بفرستی.</div>
+</header>
+<div class="progressbox"><div class="progressrow"><span>پیشرفت پاسخ‌گویی</span><span id="count">۰ پاسخ از ۰</span></div><div class="track"><div class="bar" id="bar"></div></div></div>
+<form id="quiz">
+<section class="card">
+<div class="sectionhead"><div class="num">۰</div><div><h2>اطلاعات اولیه</h2><p>برای جدا کردن پاسخ‌های افراد مختلف</p></div></div>
+<div class="q"><div class="qtitle">نام یا کد دلخواه شرکت‌کننده</div><input type="text" name="participant" placeholder="مثلاً: نفر اول / مهدی (اختیاری)"></div>
+<div class="q"><div class="qtitle">سن</div><input type="text" name="age" placeholder="سن به سال (اختیاری)"></div>
+<div class="q"><div class="qtitle">این آزمون را با چه هدفی پر می‌کنی؟</div><div class="opts">
+<label class="opt"><input type="radio" name="goal" value="شناخت بهتر خودم">شناخت بهتر خودم</label>
+<label class="opt"><input type="radio" name="goal" value="شناخت بهتر فردی دیگر">شناخت بهتر فردی دیگر</label>
+<label class="opt"><input type="radio" name="goal" value="کنجکاوی و خودارزیابی">کنجکاوی و خودارزیابی</label></div></div>
+</section>
+<div id="sections"></div>
+<div class="actions"><button class="primary" type="button" id="finish">پایان آزمون و ساخت متن پاسخ‌ها</button><button class="secondary" type="reset">پاک کردن پاسخ‌ها</button></div>
+</form>
+<section class="card" id="result">
+<div class="sectionhead"><div class="num">✓</div><div><h2>پاسخ‌ها آماده‌اند</h2><p>متن زیر را کپی کن و برای تحلیل‌گر بفرست.</p></div></div>
+<p class="success" id="status">پاسخ‌ها جمع‌آوری شدند.</p>
+<div class="resulttext" id="output"></div>
+<div class="actions"><button class="primary" type="button" id="copy">کپی همه پاسخ‌ها</button><button class="secondary" type="button" id="share">ساخت لینک پاسخ‌ها</button><button class="secondary" type="button" id="edit">بازگشت و ویرایش</button></div>
+<div id="sharebox" style="display:none;margin-top:14px"><p class="success">لینک ساخته شد. آن را برای کسی که قرار است پاسخ‌ها را تحلیل کند بفرست. با باز کردن لینک، متن کامل پاسخ‌ها نمایش داده می‌شود.</p><div class="resulttext" id="shareurl" style="overflow-wrap:anywhere"></div><button class="secondary" type="button" id="copylink" style="margin-top:10px">کپی لینک پاسخ‌ها</button></div>
+</section>
+<div class="footer">این ابزار غربالگری و خودشناسی است؛ آزمون تشخیصی یا تست استاندارد IQ محسوب نمی‌شود.</div>
+</div>
+<script>
+const sections = [
+{title:"۱. ساختار شخصیت و رفتار روزمره",sub:"ترجیحات پایدار و واکنش‌های معمول",qs:[
+["وقتی کاملاً تنهایی و هیچ‌کس از تو انتظاری ندارد، معمولاً چه جور آدمی هستی؟ چه کار می‌کنی و ذهنت کجا می‌رود؟","open"],
+["در جمع ناآشنا معمولاً چه رفتاری داری؟",["زود سر صحبت را باز می‌کنم","اول فضا و آدم‌ها را می‌سنجم، بعد وارد می‌شوم","بیشتر ساکت می‌مانم و ترجیح می‌دهم مشاهده کنم","بسته به جمع و حال روحی‌ام فرق می‌کند"]],
+["وقتی برنامه‌ات ناگهان به‌هم می‌ریزد چه می‌کنی؟",["سریع برنامه جایگزین می‌چینم","کلافه می‌شوم ولی خودم را تطبیق می‌دهم","استرس می‌گیرم و تمرکزم کم می‌شود","معمولاً رها می‌کنم و بداهه پیش می‌روم"]],
+["کدام توصیف به نظم شخصی‌ات نزدیک‌تر است؟",["منظم و برنامه‌محورم","در بعضی زمینه‌ها منظمم و در بعضی نه","بیشتر منعطف و خودجوشم","شروع می‌کنم ولی در ادامه حفظ نظم سخت است"]],
+["در تصمیم‌های مهم بیشتر به چه تکیه می‌کنی؟",["منطق و شواهد","احساس و ارزش‌های شخصی","ترکیبی از منطق و احساس","نظر آدم‌های مورد اعتماد یا شرایط"]],
+["وقتی کسی از تو انتقاد می‌کند چه واکنشی داری؟",["اول بررسی می‌کنم شاید درست بگوید","ناراحت می‌شوم اما بعد فکر می‌کنم","معمولاً حالت دفاعی می‌گیرم","انتقاد را خیلی شخصی و سنگین تجربه می‌کنم"]],
+["کدام مورد بیشتر به تو انگیزه می‌دهد؟",["پیشرفت و موفقیت","عشق و ارتباط عمیق","استقلال و آزادی","امنیت و ثبات","دیده‌شدن و تأیید دیگران"]],
+["وقتی کاری را شروع می‌کنی معمولاً چه اتفاقی می‌افتد؟",["تا پایان پیگیر می‌مانم","اگر نتیجه ببینم ادامه می‌دهم","با هیجان شروع می‌کنم و زود سرد می‌شوم","بسته به علاقه و سختی کار فرق دارد"]],
+["سه ویژگی مثبت و سه ویژگی منفی خودت را بنویس؛ ترجیحاً با مثال واقعی.","open"],
+["در مقیاس ۱ تا ۱۰ چقدر خودت را می‌شناسی؟", "scale"],
+["بزرگ‌ترین ترسی که درباره آینده داری چیست؟","open"],
+["اگر می‌توانستی یک ویژگی رفتاری خودت را تغییر بدهی، چه چیزی را انتخاب می‌کردی و چرا؟","open"],
+["دیگران معمولاً چه برداشتی از تو دارند که با شخصیت درونی‌ات فرق می‌کند؟","open"]
+]},
+{title:"۲. سبک فکر کردن و توانایی شناختی",sub:"این بخش توانایی حل مسئله را نمونه‌گیری می‌کند، نه IQ رسمی را",qs:[
+["وقتی با مسئله‌ای پیچیده روبه‌رو می‌شوی، معمولاً از کجا شروع می‌کنی؟",["آن را به بخش‌های کوچک تقسیم می‌کنم","با یک راه‌حل سریع امتحان می‌کنم","دنبال الگو و ارتباط پنهان می‌گردم","اول گیج می‌شوم و به کمک نیاز دارم"]],
+["در یادگیری موضوع تازه کدام روش برایت بهتر جواب می‌دهد؟",["خواندن و یادداشت‌برداری","دیدن نمونه و تصویر","تمرین عملی و آزمون‌وخطا","توضیح دادن موضوع برای شخص دیگر"]],
+["اگر دو نفر درباره یک موضوع مطمئن اما مخالف حرف بزنند، چه می‌کنی؟",["شواهد هر دو را بررسی می‌کنم","به فردی که بیشتر می‌شناسم اعتماد می‌کنم","نظر خودم را حفظ می‌کنم مگر دلیل قوی ببینم","معمولاً تشخیص برایم سخت می‌شود"]],
+["یک نمونه از مسئله‌ای که اخیراً حل کردی و روش حلش را توضیح بده.","open"],
+["در محاسبات ذهنی و عددی چقدر راحتی؟",["خیلی راحت","نسبتاً راحت","معمولی","سخت؛ ترجیح می‌دهم بنویسم یا از ابزار استفاده کنم"]],
+["این الگو را کامل کن: ۲، ۶، ۱۲، ۲۰، ۳۰، ؟",["۳۶","۴۰","۴۲","۴۴"]],
+["اگر همه‌ی «نارها» آبی باشند و هیچ چیز آبی سنگین نباشد، آیا ممکن است یک نار سنگین باشد؟",["بله، حتماً","خیر، طبق فرض‌ها نمی‌تواند","فقط اگر بزرگ باشد","اطلاعات کافی نیست"]],
+["یک کالا پس از ۲۰٪ تخفیف ۸۰ واحد قیمت دارد. قیمت اولیه چند واحد بوده؟",["۹۰","۹۶","۱۰۰","۱۲۰"]],
+["در به خاطر سپردن اسم‌ها، جزئیات، مسیرها یا اطلاعات چقدر قوی هستی؟ مثال بزن.","open"],
+["وقتی باوری داری و مدرک مخالفش را می‌بینی، معمولاً چه می‌کنی؟",["اگر مدرک قوی باشد نظرم را عوض می‌کنم","مدتی مقاومت می‌کنم و بعد بررسی می‌کنم","بیشتر دنبال مدرک تأییدکننده نظر خودم می‌گردم","بستگی دارد موضوع چقدر برایم مهم باشد"]]
+]},
+{title:"۳. هیجان‌ها و دنیای درونی",sub:"شناخت احساسات، تنظیم هیجان و واکنش به فشار",qs:[
+["وقتی ناراحت می‌شوی معمولاً چه می‌کنی؟",["با کسی حرف می‌زنم","تنها می‌شوم تا پردازش کنم","خودم را با کار یا سرگرمی مشغول می‌کنم","احساساتم را پنهان می‌کنم و عادی نشان می‌دهم"]],
+["وقتی عصبانی هستی بیشتر کدام واکنش را داری؟",["مستقیم و آرام حرف می‌زنم","تند می‌شوم و بعد پشیمان می‌شوم","سکوت و فاصله می‌گیرم","احساساتم را نگه می‌دارم تا ناگهان منفجر شوم"]],
+["معمولاً چقدر سریع متوجه می‌شوی دقیقاً چه احساسی داری و چرا؟",["خیلی سریع و دقیق","اغلب می‌فهمم","گاهی گیج می‌شوم","معمولاً فهمیدن احساساتم سخت است"]],
+["وقتی تحت فشار طولانی قرار می‌گیری، چه تغییری در خواب، تمرکز، اشتها یا رفتارت می‌بینی؟","open"],
+["چه چیزی بیشتر از همه می‌تواند آرامت کند؟","open"],
+["وقتی اشتباه می‌کنی با خودت چطور حرف می‌زنی؟",["مهربان و واقع‌بینانه","سخت‌گیرم اما سعی می‌کنم اصلاح کنم","خودم را سرزنش می‌کنم","مدتی از فکر کردن به آن فرار می‌کنم"]],
+["در یک ماه گذشته، چند وقت یک‌بار احساس کردی غمگین، بی‌انرژی یا بی‌علاقه‌ای؟",["اصلاً","چند روز","بیشتر روزها","تقریباً هر روز"]],
+["در یک ماه گذشته، چند وقت یک‌بار نگرانی یا تنش کنترل‌کردنش سخت بوده؟",["اصلاً","چند روز","بیشتر روزها","تقریباً هر روز"]],
+["اگر روزهای سختی داری، این وضعیت چقدر روی کار، درس، خواب یا رابطه‌هایت اثر گذاشته؟",["تقریباً هیچ","کمی","زیاد","شدید و مختل‌کننده"]],
+["وقتی به آینده فکر می‌کنی بیشتر چه حسی داری و دلیلش چیست؟","open"]
+]},
+{title:"۴. روابط و سبک اجتماعی",sub:"اعتماد، صمیمیت، مرزبندی و تعارض",qs:[
+["برای اعتماد کردن به یک نفر چه چیزی لازم داری؟","open"],
+["وقتی فرد مهم زندگی‌ات دیر جواب می‌دهد یا فاصله می‌گیرد، معمولاً چه فکری می‌کنی؟",["احتمالاً مشغول است؛ صبر می‌کنم","نگران می‌شوم شاید دیگر دوستم ندارد","ناراحت می‌شوم و من هم فاصله می‌گیرم","مستقیم و محترمانه می‌پرسم چه شده"]],
+["در اختلاف با کسی که دوستش داری چه رفتاری داری؟",["گفت‌وگو تا رسیدن به راه‌حل","برای آرام شدن زمان می‌خواهم","سکوت می‌کنم تا طرف مقابل پیش‌قدم شود","ممکن است واکنش شدید نشان بدهم"]],
+["نه گفتن و تعیین حدومرز برایت چقدر آسان است؟",["آسان؛ حتی اگر طرف ناراحت شود","معمولاً می‌توانم","احساس گناه می‌کنم و سخت است","اغلب از ترس ناراحت‌کردن دیگران کوتاه می‌آیم"]],
+["در رابطه بیشتر از چه چیزی می‌ترسی؟","open"],
+["وقتی کسی به کمک نیاز دارد اما خودت خسته‌ای چه می‌کنی؟",["صادقانه محدودیت خودم را می‌گویم","با وجود خستگی کمک می‌کنم","احساس گناه می‌کنم ولی شاید نتوانم","از موقعیت دور می‌شوم"]],
+["دوست داری دیگران محبت و علاقه‌شان را چطور نشان بدهند؟","open"],
+["در دوستی‌ها معمولاً آغازگر ارتباطی یا منتظر می‌مانی؟",["اغلب آغازگرم","بستگی به صمیمیت دارد","بیشتر منتظر می‌مانم","ارتباط اجتماعی زیادی نمی‌خواهم"]]
+]},
+{title:"۵. عادت‌ها، سبک زندگی و خودمدیریتی",sub:"رفتارهای تکرارشونده و مدیریت زمان و انرژی",qs:[
+["یک روز عادی‌ات را از بیدارشدن تا خوابیدن شرح بده.","open"],
+["بیشتر وقتت ناخواسته صرف چه چیزی می‌شود؟","open"],
+["کارهای مهم را معمولاً چه زمانی انجام می‌دهی؟",["زود و طبق برنامه","نزدیک ضرب‌الاجل","وقتی انگیزه پیدا کنم","گاهی عقب می‌افتند و انجام نمی‌شوند"]],
+["وقتی عادتی را می‌خواهی تغییر بدهی چه چیزی بیشتر مانعت می‌شود؟",["فراموشی و نبود برنامه","بی‌حوصلگی یا کمبود انرژی","استرس و احساسات","محیط و آدم‌های اطراف"]],
+["در استفاده از گوشی و شبکه‌های اجتماعی چقدر کنترل احساس می‌کنی؟",["کاملاً تحت کنترل","عموماً کنترل دارم","گاهی بیشتر از قصد استفاده می‌کنم","اغلب زمان زیادی از دستم می‌رود"]],
+["چه عادت کوچکی داری که فکر می‌کنی چیزهای زیادی درباره شخصیتت نشان می‌دهد؟","open"],
+["در مدیریت پول و خرج‌کردن کدام توصیف به تو نزدیک‌تر است؟",["برنامه‌ریزی و پس‌انداز","خرج حساب‌شده با کمی انعطاف","بیشتر لحظه‌ای خرج می‌کنم","درآمد و شرایط اجازه برنامه‌ریزی نمی‌دهد"]],
+["برای انجام کارها بیشتر به کدام متکی هستی؟",["انضباط حتی بدون انگیزه","انگیزه و علاقه","فشار و ضرب‌الاجل","حمایت و همراهی دیگران"]]
+]},
+{title:"۶. ارزش‌ها، استعدادها و مسیر رشد",sub:"چیزهایی که برایت معنا دارند و محیط مناسب تو",qs:[
+["سه ارزش مهم زندگی‌ات را نام ببر و بگو چرا مهم‌اند.","open"],
+["اگر پول و قضاوت دیگران مسئله نبود، دوست داشتی چه کاری انجام بدهی؟","open"],
+["در چه کارهایی معمولاً سریع‌تر از دیگران پیشرفت می‌کنی؟","open"],
+["چه نوع محیط کاری برایت مناسب‌تر است؟",["آزاد و مستقل","ساختارمند و قابل پیش‌بینی","تیمی و پرتعامل","رقابتی و هدف‌محور","خلاق و متنوع"]],
+["بیشتر از کدام نوع موفقیت احساس رضایت می‌کنی؟",["تسلط و مهارت عمیق","اثر مثبت روی دیگران","درآمد و امنیت","آزادی و اختیار","اعتبار و شناخته‌شدن"]],
+["اگر قرار باشد یک سال روی رشد خودت سرمایه‌گذاری کنی، چه مهارتی را انتخاب می‌کنی؟","open"],
+["به نظرت بزرگ‌ترین مانع فعلی رشدت چیست؟","open"],
+["دوست داری پنج سال دیگر چه تفاوت مشخصی با امروزت داشته باشی؟","open"],
+["چه چیزی را درباره خودت می‌دانی که معمولاً دیگران متوجهش نمی‌شوند؟","open"]
+]}
+];
+const root=document.getElementById('sections');
+let total=0;
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+sections.forEach((sec,si)=>{
+ const card=document.createElement('section');card.className='card';
+ let inner=`<div class="sectionhead"><div class="num">${si+1}</div><div><h2>${sec.title}</h2><p>${sec.sub}</p></div></div>`;
+ sec.qs.forEach((q,qi)=>{
+  total++;const name=`s${si}q${qi}`;inner+=`<div class="q"><div class="qtitle">${total}. ${q[0]}</div>`;
+  if(q[1]==='open'){inner+=`<textarea name="${name}" placeholder="با جزئیات و مثال واقعی پاسخ بده..."></textarea>`}
+  else if(q[1]==='scale'){inner+=`<div class="scale">${Array.from({length:10},(_,i)=>`<label><input type="radio" name="${name}" value="${i+1}"> ${i+1}</label>`).join('')}</div>`}
+  else{inner+=`<div class="opts">${q[1].map((o,i)=>`<label class="opt"><input type="radio" name="${name}" value="${esc(o)}"> ${esc(o)}</label>`).join('')}</div>`}
+  inner+='</div>';
+ });
+ card.innerHTML=inner;root.appendChild(card);
+});
+const form=document.getElementById('quiz');
+const count=document.getElementById('count'),bar=document.getElementById('bar');
+function update(){
+ let answered=0;
+ for(const sec of sections) sec.qs.forEach((q,qi)=>{const n=`s${sections.indexOf(sec)}q${qi}`;const el=form.elements[n];if(!el)return;
+  if(el instanceof RadioNodeList){if(el.value)answered++}else if(el.value.trim())answered++;
+ });
+ ['participant','age','goal'].forEach(n=>{const el=form.elements[n];if(el){if(el instanceof RadioNodeList){if(el.value)answered++}else if(el.value.trim())answered++}});
+ count.textContent=`${answered} پاسخ از ${total+3}`;bar.style.width=`${Math.min(100,answered/(total+3)*100)}%`;
+}
+form.addEventListener('input',update);form.addEventListener('change',update);update();
+function collect(){
+ const lines=['پاسخ‌های آزمون جامع شناخت شخصیت','--------------------------------','نام/کد: '+(form.elements.participant.value||'ثبت نشده'),'سن: '+(form.elements.age.value||'ثبت نشده'),'هدف: '+(form.elements.goal.value||'ثبت نشده'),''];
+ let idx=0;
+ sections.forEach((sec,si)=>{lines.push(sec.title);sec.qs.forEach((q,qi)=>{idx++;const el=form.elements[`s${si}q${qi}`];let val='بی‌پاسخ';if(el instanceof RadioNodeList){if(el.value)val=el.value}else if(el&&el.value.trim())val=el.value.trim();lines.push(`${idx}. ${q[0]}\nپاسخ: ${val}`)});lines.push('')});
+ lines.push('پایان پاسخ‌ها. لطفاً بر اساس پاسخ‌های واقعی تحلیل کن و محدودیت‌های آزمون را در نظر بگیر.');
+ return lines.join('\n');
+}
+document.getElementById('finish').addEventListener('click',()=>{
+ const txt=collect();document.getElementById('output').textContent=txt;
+ document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});
+});
+document.getElementById('copy').addEventListener('click',async()=>{
+ const txt=document.getElementById('output').textContent;
+ try{await navigator.clipboard.writeText(txt);document.getElementById('status').textContent='همه پاسخ‌ها کپی شدند؛ حالا آن‌ها را برای تحلیل‌گر بفرست.'}
+ catch(e){const range=document.createRange();range.selectNodeContents(document.getElementById('output'));const sel=getSelection();sel.removeAllRanges();sel.addRange(range);document.getElementById('status').textContent='متن انتخاب شد؛ گزینه Copy را بزن.'}
+});
+
+document.getElementById('share').addEventListener('click',async()=>{
+ const txt=document.getElementById('output').textContent;
+ const box=document.getElementById('sharebox');
+ try{
+   if(!('CompressionStream' in window)) throw new Error('compression unavailable');
+   const stream=new Blob([txt]).stream().pipeThrough(new CompressionStream('gzip'));
+   const compressed= new Uint8Array(await new Response(stream).arrayBuffer());
+   let binary=''; compressed.forEach(b=>binary+=String.fromCharCode(b));
+   const payload=btoa(binary).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+   const url=location.href.split('#')[0]+'#answers='+payload;
+   document.getElementById('shareurl').textContent=url;
+   box.style.display='block';
+   document.getElementById('status').textContent='لینک پاسخ‌ها آماده شد. لینک فقط پس از انتشار سایت روی اینترنت برای دیگران قابل استفاده است.';
+ }catch(e){
+   document.getElementById('shareurl').textContent='مرورگر این گوشی امکان ساخت لینک فشرده را ندارد؛ لطفاً از دکمه «کپی همه پاسخ‌ها» استفاده کن.';
+   box.style.display='block';
+ }
+});
+document.getElementById('copylink').addEventListener('click',async()=>{
+ const txt=document.getElementById('shareurl').textContent;
+ try{await navigator.clipboard.writeText(txt);document.getElementById('status').textContent='لینک کپی شد؛ آن را برای تحلیل‌گر بفرست.'}
+ catch(e){document.getElementById('status').textContent='متن لینک را انتخاب کن و Copy را بزن.'}
+});
+function decodeSharedAnswers(){
+ const m=location.hash.match(/#answers=([A-Za-z0-9_-]+)/);
+ if(!m)return;
+ try{
+   const b64=m[1].replace(/-/g,'+').replace(/_/g,'/');
+   const binary=atob(b64+'='.repeat((4-b64.length%4)%4));
+   const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));
+   const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+   new Response(stream).text().then(txt=>{
+     document.getElementById('output').textContent=txt;
+     document.getElementById('result').style.display='block';
+     document.getElementById('quiz').style.display='none';
+     document.querySelector('.progressbox').style.display='none';
+     document.querySelector('.hero').style.display='none';
+     document.getElementById('status').textContent='پاسخ‌های ارسال‌شده از طریق لینک:';
+     document.getElementById('result').scrollIntoView();
+   }).catch(()=>{});
+ }catch(e){}
+}
+decodeSharedAnswers();
+
+document.getElementById('edit').addEventListener('click',()=>{document.getElementById('result').style.display='none';form.scrollIntoView({behavior:'smooth'})});
+form.addEventListener('reset',()=>{setTimeout(()=>{update();document.getElementById('result').style.display='none'},0)});
+</script>
+</body>
+</html>
